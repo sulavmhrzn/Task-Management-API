@@ -25,5 +25,6 @@ urlpatterns = [
     path("api/users/", include("accounts.urls")),
     path("api/auth/login/", UserLoginView.as_view(), name="obtain_auth_token"),
     path("api/auth/logout/", UserLogoutView.as_view(), name="logout_view"),
-    path("api/auth/", include("rest_framework.urls")),
+    path("api-auth/", include("rest_framework.urls")),
+    path("api/projects/", include("projects.urls")),
 ]

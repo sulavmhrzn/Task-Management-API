@@ -11,8 +11,7 @@ from accounts.serializers import (
     UserSerializer,
 )
 from common.envelope import envelope
-
-from .permissions import IsAdminUserOrCreateOnly
+from common.permissions import IsAdminUserOrCreateOnly
 
 
 class UserListCreateView(generics.ListCreateAPIView):
