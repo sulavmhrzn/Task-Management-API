@@ -4,5 +4,5 @@ from accounts import views
 
 urlpatterns = [
     path("", views.UserListCreateView.as_view(), name="users"),
-    # path("create/", views.UserCreateView.as_view(), name="user-create"),
+    path("me/", views.UserDashboardView.as_view(), name="dashboard"),
 ]

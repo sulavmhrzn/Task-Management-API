@@ -16,6 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
             "last_name",
             "is_staff",
         )
+        extra_kwargs = {"is_staff": {"write_only": True}}
 
 
 class CreateUserSerializer(serializers.ModelSerializer):
@@ -57,3 +58,15 @@ class CreateUserSerializer(serializers.ModelSerializer):
         validated_data.pop("password2")
         instance = User.objects.create_user(**validated_data)
         return instance
+
+
+class UpdateUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["email"]
+
+    def validate_email(self, data):
+        user = User.objects.filter(email=data)
+        if user.exists() and not user.first().id == self.instance.id:
+            raise ValidationError("email already in use")
+        return data
