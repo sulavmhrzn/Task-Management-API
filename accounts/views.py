@@ -26,6 +26,9 @@ class UserListCreateView(generics.ListCreateAPIView):
             return CreateUserSerializer
         return super().get_serializer_class()
 
+    def perform_create(self, serializer):
+        return super().perform_create(serializer)
+
 
 class UserLogoutView(APIView):
     def post(self, request):
