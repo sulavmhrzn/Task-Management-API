@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "accounts.apps.AccountsConfig",
     "projects.apps.ProjectsConfig",
+    "tasks.apps.TasksConfig",
 ]
 
 MIDDLEWARE = [

@@ -27,4 +27,5 @@ urlpatterns = [
     path("api/auth/logout/", UserLogoutView.as_view(), name="logout_view"),
     path("api-auth/", include("rest_framework.urls")),
     path("api/projects/", include("projects.urls")),
+    path("api/tasks/", include("tasks.urls")),
 ]
