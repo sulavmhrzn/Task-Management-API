@@ -2,6 +2,8 @@ from rest_framework import serializers
 from rest_framework.validators import ValidationError
 
 from accounts.models import User
+from projects.serializers import ProjectSerializer
+from tasks.serializers import TaskSerializer
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -70,3 +72,9 @@ class UpdateUserSerializer(serializers.ModelSerializer):
         if user.exists() and not user.first().id == self.instance.id:
             raise ValidationError("email already in use")
         return data
+
+
+class DashboardSerializer(serializers.Serializer):
+    user = UserSerializer()
+    projects = ProjectSerializer(many=True)
+    tasks = TaskSerializer(many=True)

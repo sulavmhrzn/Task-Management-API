@@ -1,3 +1,4 @@
+from django.db.models import Q
 from rest_framework import generics, permissions, status
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -7,11 +8,14 @@ from rest_framework.views import APIView
 from accounts.models import User
 from accounts.serializers import (
     CreateUserSerializer,
+    DashboardSerializer,
     UpdateUserSerializer,
     UserSerializer,
 )
 from common.envelope import envelope
 from common.permissions import IsAdminUserOrCreateOnly
+from projects.models import Project
+from tasks.models import Task
 
 
 class UserListCreateView(generics.ListCreateAPIView):
@@ -57,10 +61,19 @@ class UserLoginView(ObtainAuthToken):
 
 class UserDashboardView(generics.GenericAPIView):
     permission_classes = [permissions.IsAuthenticated]
+    serializer_class = DashboardSerializer
 
     def get(self, request, *args, **kwargs):
-        obj = request.user
-        serializer = UserSerializer(instance=obj)
+        data = {
+            "user": request.user,
+            "projects": Project.objects.filter(
+                Q(created_by=request.user) | Q(team__in=[request.user])
+            ).distinct(),
+            "tasks": Task.objects.filter(
+                Q(created_by=request.user) | Q(assigned_developers__in=[request.user])
+            ).distinct(),
+        }
+        serializer = DashboardSerializer(data)
         return Response(envelope(status="ok", message={"data": serializer.data}))
 
     def patch(self, request, *args, **kwargs):
