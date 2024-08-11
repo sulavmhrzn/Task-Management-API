@@ -7,7 +7,7 @@ from tasks.serializers import TaskSerializer, TaskUpdateSerializerForDeveloper
 
 class TaskListCreateView(generics.ListCreateAPIView):
     serializer_class = TaskSerializer
-    queryset = Task.objects.all()
+    queryset = Task.objects.prefetch_related("assigned_developers").all()
     permission_classes = [permissions.IsAuthenticated, IsManagerOrReadOnly]
 
     def perform_create(self, serializer):
@@ -18,7 +18,11 @@ class TaskListCreateView(generics.ListCreateAPIView):
 # else validation errors are raised. I currently have no idea how to fix this.
 class TaskRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TaskSerializer
-    queryset = Task.objects.all()
+    queryset = (
+        Task.objects.prefetch_related("assigned_developers")
+        .select_related("created_by")
+        .all()
+    )
     permission_classes = [
         permissions.IsAuthenticated,
         IsTaskOwnerOrAssignedDeveloper,
