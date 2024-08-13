@@ -44,9 +44,9 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "rest_framework",
     "rest_framework.authtoken",
-    "accounts.apps.AccountsConfig",
-    "projects.apps.ProjectsConfig",
-    "tasks.apps.TasksConfig",
+    "applications.accounts.apps.AccountsConfig",
+    "applications.projects.apps.ProjectsConfig",
+    "applications.tasks.apps.TasksConfig",
 ]
 
 MIDDLEWARE = [

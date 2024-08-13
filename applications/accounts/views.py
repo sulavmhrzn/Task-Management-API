@@ -5,17 +5,18 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from accounts.models import User
-from accounts.serializers import (
+from applications.projects.models import Project
+from applications.tasks.models import Task
+from common.envelope import envelope
+from common.permissions import IsAdminUserOrCreateOnly
+
+from .models import User
+from .serializers import (
     CreateUserSerializer,
     DashboardSerializer,
     UpdateUserSerializer,
     UserSerializer,
 )
-from common.envelope import envelope
-from common.permissions import IsAdminUserOrCreateOnly
-from projects.models import Project
-from tasks.models import Task
 
 
 class UserListCreateView(generics.ListCreateAPIView):

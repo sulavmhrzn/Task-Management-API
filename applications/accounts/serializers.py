@@ -1,9 +1,10 @@
 from rest_framework import serializers
 from rest_framework.validators import ValidationError
 
-from accounts.models import User
-from projects.serializers import ProjectSerializer
-from tasks.serializers import TaskSerializer
+from applications.projects.serializers import ProjectSerializer
+from applications.tasks.serializers import TaskSerializer
+
+from .models import User
 
 
 class UserSerializer(serializers.ModelSerializer):

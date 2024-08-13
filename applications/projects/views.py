@@ -1,8 +1,8 @@
 from rest_framework import generics, pagination, permissions
 
 from common.permissions import IsManagerOrReadOnly, IsProjectOwnerOrReadOnly
-from projects.models import Project
 
+from .models import Project
 from .serializers import ProjectSerializer
 
 

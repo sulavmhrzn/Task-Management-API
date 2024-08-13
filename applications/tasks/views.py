@@ -2,8 +2,9 @@ from rest_framework import generics, permissions
 
 from common.mail import send_create_task_mail
 from common.permissions import IsManagerOrReadOnly, IsTaskOwnerOrAssignedDeveloper
-from tasks.models import Task
-from tasks.serializers import TaskSerializer, TaskUpdateSerializerForDeveloper
+
+from .models import Task
+from .serializers import TaskSerializer, TaskUpdateSerializerForDeveloper
 
 
 class TaskListCreateView(generics.ListCreateAPIView):
