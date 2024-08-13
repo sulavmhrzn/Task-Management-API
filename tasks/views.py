@@ -1,5 +1,6 @@
 from rest_framework import generics, permissions
 
+from common.mail import send_create_task_mail
 from common.permissions import IsManagerOrReadOnly, IsTaskOwnerOrAssignedDeveloper
 from tasks.models import Task
 from tasks.serializers import TaskSerializer, TaskUpdateSerializerForDeveloper
@@ -11,7 +12,8 @@ class TaskListCreateView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated, IsManagerOrReadOnly]
 
     def perform_create(self, serializer):
-        serializer.save(created_by=self.request.user)
+        task = serializer.save(created_by=self.request.user)
+        send_create_task_mail(task)
 
 
 # If user is a manager then request body should include all the necessary fields

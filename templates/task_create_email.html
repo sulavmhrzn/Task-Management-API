@@ -1,0 +1,84 @@
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .content {
+            margin: 20px 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>New Task Assigned</h1>
+        </div>
+        <div class="content">
+            <p>You have been assigned a new task in the project <strong>{{project_name}}</strong>.</p>
+
+            <h3>Task Details:</h3>
+            <ul>
+                <li><strong>Title:</strong> {{task_title}}</li>
+                <li><strong>Description:</strong> {{task_description}}</li>
+                <li><strong>Assigned By:</strong> {{assigned_by}}</li>
+                <li><strong>Priority:</strong> {{priority_level}}</li>
+            </ul>
+
+            <p>Please ensure that the task is completed by the due date. If you have any questions or need further
+                clarification, feel free to reach out to your manager.</p>
+        </div>
+        <div class="footer">
+            <p>Best regards,<br>The Task Management Team</p>
+            <p><a href="#" style="color: #4CAF50;">Visit your Dashboard</a></p>
+        </div>
+    </div>
+</body>
+
+</html>
