@@ -23,7 +23,7 @@ from applications.accounts.views import UserLoginView, UserLogoutView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    # path("api/")
+    path("api/", include("applications.api_overview.urls")),
     path("api/users/", include("applications.accounts.urls")),
     path("api/auth/login/", UserLoginView.as_view(), name="obtain_auth_token"),
     path("api/auth/logout/", UserLogoutView.as_view(), name="logout_view"),
