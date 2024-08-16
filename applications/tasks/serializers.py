@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from applications.tasks.models import Task
+from applications.tasks.models import AuditLog, Task
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -50,3 +50,8 @@ class TaskUpdateSerializerForDeveloper(serializers.ModelSerializer):
         model = Task
         fields = ["status", "priority", "task_type"]
         read_only_fields = ["title"]
+
+class AuditLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AuditLog
+        fields = "__all__"

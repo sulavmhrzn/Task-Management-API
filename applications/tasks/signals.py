@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
-from django.db.models.signals import m2m_changed, post_save, pre_delete, pre_save
+from django.db.models.signals import (m2m_changed, post_save, pre_delete,
+                                      pre_save)
 from django.dispatch import receiver
 
 from .models import AuditLog, Task
@@ -36,7 +37,6 @@ def track_assigned_developers_changes(sender, instance, action, **kwargs):
                 )
             }
         previous_state = getattr(instance, "_previous_state", None)
-        print("M2M: ", previous_state)
         current_developers = set(
             instance.assigned_developers.values_list("username", flat=True)
         )
@@ -79,7 +79,6 @@ def create_audit_log(sender, instance, created, **kwargs):
         }
 
     previous_state = instance._previous_state
-    print("Current: ", instance._previous_state)
     changed_fields = {}
 
     if created:
