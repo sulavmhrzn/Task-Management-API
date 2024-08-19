@@ -53,3 +53,12 @@ class IsTaskOwnerOrAssignedDeveloper(permissions.BasePermission):
             obj.created_by == request.user
             or request.user in obj.assigned_developers.all()
         )
+
+
+class IsManagerRole(permissions.BasePermission):
+    """
+    Requires manager role
+    """
+
+    def has_permission(self, request, view):
+        return request.user.is_manager()
